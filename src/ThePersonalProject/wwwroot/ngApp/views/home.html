@@ -1,0 +1,18 @@
+
+<h1>Home</h1>
+
+<div >
+  <span>{{controller.message.name}}</span>
+  <span>{{controller.message.location}}</span>
+    <ng-map center="Houston" zoom="9" mayTypeId="TERRAIN" id="map" on-click="controller.addMarkerCallback()">
+        <marker ng-repeat="(idx, park) in controller.skatePark" position="{{park.location}}" on-click="controller.getInfoCallback()" id="marker-{{idx}}"></marker>
+      
+        <marker ng-repeat="pos in controller.positions" position="{{pos.lat}}, {{pos.lng}}" animation="Animation.BOUNCE" draggable="true"></marker>
+     </ng-map>
+  <div>
+    <button class="btn btn-primary" ng-click="controller.saveMarker()">Save</button>
+    <button class="btn btn-primary" ng-click="controller.deleteMarker()">Delete</button>
+    <input type="text" placeholder="Name your spot!" ng-model="controller.name"/>
+  </div>
+
+</div>
