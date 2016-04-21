@@ -42,7 +42,7 @@ namespace ThePersonalProject.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]SkateParkDTO skateSpot)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && skateSpot.Name != null)
             {
                 _parkService.NewSpot(skateSpot);
                 return Ok();

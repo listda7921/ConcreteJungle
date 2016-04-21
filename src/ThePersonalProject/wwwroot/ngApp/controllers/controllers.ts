@@ -4,14 +4,14 @@ namespace ThePersonalProject.Controllers {
     export class HomeController {
 
         public skatePark;
-        public message: any = {};
-        public name; 
+        public message: {name:string, location:string, id:number} = <any>{};
+        public nameMarker; 
 
         get positions() {
             return this.addMarkerService.positions;
         }
 
-        constructor(private $http: ng.IHttpService, private $scope: ng.IScope, private addMarkerService: ThePersonalProject.Services.AddMarkerService) {
+        constructor(private $http: ng.IHttpService, private $scope: ng.IScope, private addMarkerService: ThePersonalProject.Services.AddMarkerService, private $state: ng.ui.IStateService) {
 
             $http.get('/api/SkatePark')
                 .then((response) => {
@@ -22,9 +22,13 @@ namespace ThePersonalProject.Controllers {
         //$scope.Apply includes the variable assignments in angular, since the on-click method executed outside of angular
         getInfo(idx) {
             this.$scope.$apply(() => {
+                
                 this.message.name = this.skatePark[idx].name;
                 this.message.location = this.skatePark[idx].location;
+                this.message.id = this.skatePark[idx].id;
+                
             });
+            //this.$state.go('comments');
         }
         // `THIS` IS THE MARKER
         //problems with using "this". "this" is defined inside the Google maps API instead of the controllers scope.
@@ -34,6 +38,7 @@ namespace ThePersonalProject.Controllers {
 
             angular.element('#map').scope()['controller']
                 .getInfo(parseInt(this['id'].substring(7)));
+
         }
         //$scope.Apply includes the variable assignments in angular, since the on-click method executed outside of angular
         public addMarker(ll) {
@@ -54,17 +59,28 @@ namespace ThePersonalProject.Controllers {
         public saveMarker() {
             let skateSpot = {
                 location: `${this.addMarkerService.positions[0].lat.toString()}, ${this.addMarkerService.positions[0].lng.toString()}`,
-                name: this.name
+                name: this.nameMarker
             };
             console.log(skateSpot.location);
             console.log(skateSpot.name);
             this.$http.post('/api/SkatePark', skateSpot)
                 .then((response) => {
-                    return this.message = "Your skate spot has been saved.";
+                    this.$state.go('about');
                 });
         }
     }
 
+    export class CommentsController {
+        public skatePark;
+
+        //constructor(private $http: ng.IHttpService) {
+        //    $http.get(`/api/SkatePark/${id}`){
+        //        .then((response) => {
+        //            this.skatePark = response.data;
+        //        })
+        //    }
+        //}
+    }
 
     export class AboutController {
         public message = 'Hello from the about page!';

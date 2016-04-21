@@ -6,12 +6,9 @@ namespace ThePersonalProject.Services {
 
         
         addMarker(ll) {
-            if (this.positions.length < 1) {
+            this.positions = [];
                 this.positions.push(ll);
-            }
-            else {
-                alert("Only one skate spot can be added at a time");
-            }
+         
         }
 
         deleteMarker() {

@@ -21,6 +21,12 @@ namespace ThePersonalProject {
                 controller: ThePersonalProject.Controllers.AboutController,
                 controllerAs: 'controller'
             })
+            .state('comments', {
+                url: '/:skateParkId/comments',
+                templateUrl: '/ngApp/views/comments.html',
+                controller: ThePersonalProject.Controllers.CommentsController,
+                controllerAs: 'controller'
+            })
             .state('notFound', {
                 url: '/notFound',
                 templateUrl: '/ngApp/views/notFound.html'

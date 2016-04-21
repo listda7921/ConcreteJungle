@@ -7,6 +7,7 @@ namespace ThePersonalProject.Services.Models
 {
     public class SkateParkDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
     }

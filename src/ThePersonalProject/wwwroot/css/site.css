@@ -1,5 +1,28 @@
 ng-map {
-  width: 400px;
-  height: 400px;
+  width: 60vw;
+  height: 60vh;
 }
-
+.flex-container-index {
+  display: flex;
+  justify-content:center;
+  background: #eee;
+}
+.flex-container {
+  display: flex;
+  justify-content:center;
+  flex-direction:column;
+  flex-wrap: wrap;
+  align-content:center;
+}
+.flex-item {
+}
+.flex-item-comment {
+  height: 70vh;
+  width: 60vw;
+  background: grey;
+  border: 2px solid white;
+}
+.flex-item-comment textarea {
+  width: 58vw;
+  align-content: space-around;
+}

@@ -21,6 +21,7 @@ namespace ThePersonalProject.Services
             return (from p in _parkRepo.List()
                     select new SkateParkDTO
                     {
+                        Id = p.Id,
                         Name = p.Name,
                         Location = p.Location
                     }).ToList();
